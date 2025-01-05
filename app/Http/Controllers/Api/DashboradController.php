@@ -267,4 +267,21 @@ class DashboradController extends Controller
         }
 
     }//End Method
+
+    public function cart_fetch(){
+
+        $user = auth('sanctum')->user();
+        $data = DB::table('carts')
+        ->where('user_id','=',$user->id)
+        ->join('products','carts.product','products.id')
+        ->select('carts.id', 'carts.price','carts.quantity','carts.created_at', 'products.pro_name','products.img')
+        ->latest()
+        ->paginate(10);
+        return response()->json([
+            'status'    => false,
+            'message'   => 'Fetch Cart All Products',
+            'data'   => $data
+            
+        ],200);
+    }//End Method
 }
