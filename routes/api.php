@@ -24,6 +24,7 @@ Route::controller(DashboradController::class)->group(function () {
     Route::any('add-cart','add_cart')->middleware('auth:sanctum');
     Route::get('cart-fetch','cart_fetch')->middleware('auth:sanctum');
     Route::get('cart-remove/{id}','cart_remove');
+    Route::get('cart-remove-all','cart_remove_all');
 });
 
 Route::controller(AuthController::class)->group(function () {
